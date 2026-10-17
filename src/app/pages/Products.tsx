@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, BarChart3, Shield, Sparkles, TrendingUp, Users2, Zap } from 'lucide-react';
 import { Link } from 'react-router';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import Reveal from '../components/Reveal';
 import { StatusBadge } from '../components/StatusBadge';
 import { ROUTES } from '../routePaths';
 
@@ -103,13 +104,11 @@ export default function Products() {
         <div className="section-with-media media-left">
           <div className="section-body">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 cards-grid">
-              {products.map((product) => {
+              {products.map((product, idx) => {
                 const Icon = product.icon;
                 return (
-                  <article
-                    key={product.name}
-                    className="group card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/8 transition-all hover:-translate-y-1"
-                  >
+                  <Reveal as="article" key={product.name} className="group card-equal card-pad surface-panel" delay={idx * 70}>
+                    
                     <div className="flex items-start justify-between mb-6">
                       <div className={`w-12 h-12 ${product.gradient} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform`}>
                         <Icon size={22} className="text-[var(--text-primary)]" />

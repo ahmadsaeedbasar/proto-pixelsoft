@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, Check, Code2, Globe, Lightbulb, Palette, Smartphone, Sparkles } from 'lucide-react';
 import { Link } from 'react-router';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import Reveal from '../components/Reveal';
 import { ROUTES } from '../routePaths';
 
 const SECTION_MEDIA = {
@@ -113,14 +114,11 @@ export default function Services() {
         <div className="section-with-media media-left">
           <div className="section-body">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 cards-grid">
-              {services.map((service) => {
+              {services.map((service, idx) => {
                 const Icon = service.icon;
                 return (
-                  <article
-                    key={service.title}
-                    className="group card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/8 transition-all hover:-translate-y-1"
-                  >
-                    <div className={`w-12 h-12 ${service.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform`}>
+                  <Reveal as="article" key={service.title} className={`group card-equal card-pad surface-panel anim-service`} delay={idx * 80}>
+                    <div className={`w-12 h-12 ${service.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform service-icon`}>
                       <Icon size={22} className="text-[var(--text-primary)]" />
                     </div>
                     <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)]">{service.title}</h3>
@@ -151,15 +149,15 @@ export default function Services() {
             </div>
 
             <div className="grid md:grid-cols-3 cards-grid">
-              {projects.map((project) => (
-                <article key={project.name} className="card-equal surface-panel card-pad hover:border-[var(--primary)]/30 transition-all">
+              {projects.map((project, idx) => (
+                <Reveal as="article" key={project.name} className="card-equal surface-panel card-pad anim-project" delay={idx * 100}>
                   <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-secondary)] mb-3">{project.category}</p>
                   <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3">{project.name}</h3>
                   <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">{project.summary}</p>
                   <div className="status-success inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium">
                     {project.impact}
                   </div>
-                </article>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -177,15 +175,12 @@ export default function Services() {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 cards-grid">
-                {process.map((phase) => (
-                  <article
-                    key={phase.step}
-                    className="card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-lg transition-all"
-                  >
-                    <div className="text-4xl font-bold text-[var(--primary)]/15 mb-4">{phase.step}</div>
+                {process.map((phase, idx) => (
+                  <Reveal as="article" key={phase.step} className="card-equal card-pad surface-panel anim-process hover:border-[var(--primary)]/30 hover:shadow-lg transition-all" delay={idx * 90}>
+                    <div className="text-4xl font-bold text-[var(--primary)]/15 mb-4 step-badge">{phase.step}</div>
                     <h3 className="text-lg font-bold mb-2 text-[var(--text-primary)]">{phase.title}</h3>
                     <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{phase.desc}</p>
-                  </article>
+                  </Reveal>
                 ))}
               </div>
             </div>

@@ -158,6 +158,62 @@ body {
     animation: media-glow 5.2s ease-in-out infinite alternate;
   }
 
+  /* Entry reveal used across cards with optional stagger via inline style */
+  .reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    will-change: transform, opacity;
+  }
+
+  .reveal.in-view {
+    animation: reveal-up 640ms cubic-bezier(.2,.9,.2,1) forwards;
+  }
+
+  @keyframes reveal-up {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Services: subtle icon float and card lift on hover */
+  .anim-service .service-icon {
+    animation: icon-float 3.6s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes icon-float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(-2deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+
+  .anim-service:hover {
+    transform: translateY(-6px);
+    transition: transform 280ms cubic-bezier(.2,.9,.2,1), box-shadow 280ms;
+  }
+
+  /* Projects: 3D tilt + subtle parallax on hover */
+  .anim-project {
+    transform-style: preserve-3d;
+    perspective: 900px;
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+
+  .anim-project:hover {
+    transform: translateY(-8px) rotateX(6deg) rotateY(-6deg);
+    box-shadow: 0 18px 40px rgba(2,6,23,0.28);
+  }
+
+  /* Process steps: gentle pulse on step number to give life during list */
+  .anim-process .step-badge {
+    animation: step-pulse 2200ms ease-in-out infinite;
+  }
+
+  @keyframes step-pulse {
+    0% { transform: scale(1); opacity: 0.98; }
+    50% { transform: scale(1.045); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.98; }
+  }
+
   .media-tag {
     @apply absolute left-4 bottom-4 text-[10px] uppercase tracking-[0.12em] px-2.5 py-1 border border-border/70 bg-card/90 text-[var(--text-primary)];
     border-radius: var(--radius);
