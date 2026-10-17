@@ -131,7 +131,7 @@ export default function Services() {
                         </li>
                       ))}
                     </ul>
-                  </article>
+                  </Reveal>
                 );
               })}
             </div>
