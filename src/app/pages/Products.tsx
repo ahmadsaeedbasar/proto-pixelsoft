@@ -130,7 +130,7 @@ export default function Products() {
                       Learn more
                       <ArrowRight size={14} />
                     </button>
-                  </article>
+                  </Reveal>
                 );
               })}
             </div>
