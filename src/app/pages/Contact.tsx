@@ -1,11 +1,12 @@
 import React from 'react';
 import { ArrowRight, Mail, MapPin, Send } from 'lucide-react';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import { SectionAnimation } from '../components/SectionAnimation';
 
 const SECTION_MEDIA = {
-  hero: { src: '/media/contact-hero-right.gif', alt: 'Contact hero animation', label: 'Start Sprint' },
-  form: { src: '/media/contact-form-left.gif', alt: 'Contact form animation', label: 'Brief Intake' },
-  cta: { src: '/media/contact-cta-right.gif', alt: 'Consultation animation', label: 'Quick Review' },
+  hero: { src: 'https://lottiefiles.com/free-animation/send-a-message-fW7mmuNj9F', alt: 'Send message animation', label: 'Start Sprint' },
+  form: { src: 'https://lottiefiles.com/free-animation/contact-sent-email-DBnHqwgGQE', alt: 'Contact sent animation', label: 'Brief Intake' },
+  cta: { src: 'https://lottiefiles.com/free-animation/contact-sent-email-DBnHqwgGQE', alt: 'Contact sent animation', label: 'Quick Review' },
 } satisfies Record<string, SectionMediaItem>;
 
 export default function Contact() {
@@ -23,13 +24,15 @@ export default function Contact() {
               <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
                 Share your product challenge and we&apos;ll propose a UX strategy plus prototype execution plan.
               </p>
+              <SectionAnimation variant="hero" size="lg" className="mt-12 lg:mt-0 lg:ml-14" />
             </div>
 
             <div className="section-with-media media-left">
               <div className="section-body">
                 <div className="grid md:grid-cols-2 gap-8 md:gap-10 p-2 md:p-3 max-w-5xl mx-auto">
                   <aside className="space-y-6">
-                    <div className="surface-panel card-pad">
+                    <div className="surface-panel card-pad relative">
+                      <SectionAnimation variant="contact" size="sm" className="absolute top-4 right-4" />
                       <h2 className="text-2xl font-bold mb-3 text-[var(--text-primary)]">Discovery Call</h2>
                       <p className="text-[var(--text-secondary)] leading-relaxed">
                         We discuss audience, goals, product stage, and constraints to shape the right sprint scope.
@@ -134,8 +137,9 @@ export default function Contact() {
       <section className="section-wrap section-pad">
         <div className="section-with-media media-right">
           <div className="section-body">
-            <div className="surface-elevated card-pad flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
+          <div className="surface-elevated card-pad flex flex-col md:flex-row md:items-center md:justify-between gap-4 relative">
+            <SectionAnimation variant="cta" size="md" className="absolute top-4 right-4" />
+            <div>
                 <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-1">Need a fast prototype review?</h3>
                 <p className="text-[var(--text-secondary)]">Book a 30-minute session with our senior UX team.</p>
               </div>

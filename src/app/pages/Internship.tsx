@@ -2,14 +2,15 @@ import React from 'react';
 import { ArrowRight, Award, Brain, Check, Clock, Code2, LineChart, Palette } from 'lucide-react';
 import { Link } from 'react-router';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import { SectionAnimation } from '../components/SectionAnimation';
 import { StatusBadge } from '../components/StatusBadge';
 import { ROUTES } from '../routePaths';
 
 const SECTION_MEDIA = {
-  hero: { src: '/media/internship-hero-right.gif', alt: 'Internship hero animation', label: 'Program Visual' },
-  tracks: { src: '/media/internship-tracks-left.gif', alt: 'Learning tracks animation', label: 'Learning Tracks' },
-  journey: { src: '/media/internship-journey-right.gif', alt: 'Program journey animation', label: 'Program Journey' },
-  outcomes: { src: '/media/internship-outcomes-left.gif', alt: 'Program outcomes animation', label: 'Outcomes' },
+  hero: { src: 'https://lottiefiles.com/free-animation/join-the-team-qWVWPNee3i', alt: 'Join the team animation', label: 'Program Visual' },
+  tracks: { src: 'https://lottiefiles.com/free-animation/ux-ui-Qz7boeYI1a', alt: 'UX UI animation', label: 'Learning Tracks' },
+  journey: { src: 'https://lottiefiles.com/free-animation/analytics-chart-446AFiFcN3', alt: 'Analytics chart animation', label: 'Program Journey' },
+  outcomes: { src: 'https://lottiefiles.com/free-animation/creative-team-eBolNfIgIj', alt: 'Creative team animation', label: 'Outcomes' },
 } satisfies Record<string, SectionMediaItem>;
 
 export default function Internship() {
@@ -84,6 +85,7 @@ export default function Internship() {
               Apply Now
               <ArrowRight size={18} />
             </Link>
+            <SectionAnimation variant="hero" size="lg" className="mt-12 lg:mt-0 lg:ml-14" />
           </div>
           <SectionMedia media={SECTION_MEDIA.hero} />
         </div>
@@ -103,8 +105,11 @@ export default function Internship() {
                 return (
                   <article
                     key={track.title}
-                    className="group card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/8 transition-all hover:-translate-y-1"
+                    className="group card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/8 transition-all hover:-translate-y-1 relative"
                   >
+                    {track.title === tracks[0].title && (
+                      <SectionAnimation variant="tracks" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className="flex items-start justify-between mb-6">
                       <div className={`w-12 h-12 ${track.gradient} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform`}>
                         <Icon size={22} className="text-[var(--text-primary)]" />
@@ -148,8 +153,11 @@ export default function Internship() {
 
               <div className="grid md:grid-cols-5 cards-grid-tight">
                 {roadmap.map((phase, index) => (
-                  <article key={phase.phase} className="card-equal card-pad surface-panel hover:border-[var(--primary)]/30 transition-colors">
-                    <div className="w-8 h-8 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius)] flex items-center justify-center font-bold text-sm mb-4">
+                <article key={phase.phase} className="card-equal card-pad surface-panel hover:border-[var(--primary)]/30 transition-colors relative">
+                  {phase.phase === roadmap[0].phase && (
+                    <SectionAnimation variant="journey" size="sm" className="absolute top-4 right-4" />
+                  )}
+                  <div className="w-8 h-8 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius)] flex items-center justify-center font-bold text-sm mb-4">
                       {index + 1}
                     </div>
                     <h3 className="font-semibold mb-1 text-sm text-[var(--text-primary)]">{phase.phase}</h3>
@@ -189,7 +197,8 @@ export default function Internship() {
                   </ul>
                 </div>
 
-                <div className="squircle bg-card/60 backdrop-blur-sm rounded-[var(--radius)] p-8 border border-border/80">
+                <div className="squircle bg-card/60 backdrop-blur-sm rounded-[var(--radius)] p-8 border border-border/80 relative">
+                  <SectionAnimation variant="team" size="sm" className="absolute top-4 right-4" />
                   <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4">Ready to join?</h3>
                   <p className="text-sm text-[var(--text-secondary)] mb-6">
                     Enrollment is open for the upcoming internship cohort.

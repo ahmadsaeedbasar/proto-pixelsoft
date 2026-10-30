@@ -64,7 +64,7 @@ export function Navbar() {
           </div>
 
           <button
-            className="squircle md:hidden p-2 text-[var(--text-secondary)] rounded-[var(--radius)] border border-border/80 bg-card/90 hover:text-[var(--text-primary)] transition-colors"
+            className="squircle md:hidden p-2 text-[var(--text-secondary)] rounded-[var(--radius)] border border-border/80 bg-card/40 backdrop-blur-sm hover:text-[var(--text-primary)] transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation menu"
           >
@@ -73,7 +73,7 @@ export function Navbar() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 mb-4 space-y-1 border border-border/60 rounded-[var(--radius)] bg-card/95 shadow-xl">
+          <div className="md:hidden py-4 mb-4 space-y-1 border border-border/60 rounded-[var(--radius)] bg-card/70 backdrop-blur-xl">
             {navLinks.map((link) => (
               <Link
                 key={link.path}

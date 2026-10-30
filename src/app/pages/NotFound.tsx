@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Home } from 'lucide-react';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import { SectionAnimation } from '../components/SectionAnimation';
 import { ROUTES } from '../routePaths';
 
 const SECTION_MEDIA = {
-  notFound: { src: '/media/notfound-right.gif', alt: 'Page not found animation', label: '404 Visual' },
+  notFound: { src: 'https://lottiefiles.com/free-animation/404-page-zKcjdAJgNP', alt: '404 page animation', label: '404 Visual' },
 } satisfies Record<string, SectionMediaItem>;
 
 export default function NotFound() {
@@ -19,6 +20,7 @@ export default function NotFound() {
             <p className="text-lg text-[var(--text-secondary)] mb-8">
               The page you&apos;re looking for doesn&apos;t exist or has been moved.
             </p>
+            <SectionAnimation variant="notfound" size="lg" className="mx-auto mb-6" />
             <Link to={ROUTES.home} className="cta-primary px-8 py-4">
               <Home size={20} />
               Back to Home

@@ -39,13 +39,13 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-[10px] uppercase tracking-[0.2em] text-[var(--text-secondary)] mb-4">Connect</h4>
             <div className="flex gap-3">
-              <a href="#" className="squircle inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius)] border border-border/80 bg-card/90 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--muted)] transition-colors">
+              <a href="#" className="squircle inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius)] border border-border/80 bg-card/40 backdrop-blur-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--muted)] transition-colors">
                 <Github size={18} />
               </a>
-              <a href="#" className="squircle inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius)] border border-border/80 bg-card/90 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--muted)] transition-colors">
+              <a href="#" className="squircle inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius)] border border-border/80 bg-card/40 backdrop-blur-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--muted)] transition-colors">
                 <Twitter size={18} />
               </a>
-              <a href="#" className="squircle inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius)] border border-border/80 bg-card/90 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--muted)] transition-colors">
+              <a href="#" className="squircle inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius)] border border-border/80 bg-card/40 backdrop-blur-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--muted)] transition-colors">
                 <Linkedin size={18} />
               </a>
             </div>

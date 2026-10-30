@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { ArrowRight, Blocks, Layers3, Rocket, Sparkles, TrendingUp, Zap } from 'lucide-react';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import { SectionAnimation } from '../components/SectionAnimation';
 import { ROUTES } from '../routePaths';
 
 /**
@@ -55,21 +56,19 @@ const PRODUCT_PREVIEWS: ProductPreviewItem[] = [
  * The layout and animations are handled by shared classes in `index.css`.
  */
 const SECTION_MEDIA = {
-  // Professional Lottie animation for the landing hero card.
-  // Keep local file or swap to a trusted JSON URL.
   hero: {
-    src: 'https://lottiefiles.com/animation/underwater-trash-with-fish-floating-animation_10719813',
-    alt: 'Underwater fish floating animation',
+    src: 'https://lottiefiles.com/free-animation/ui-and-ux-design-K6It0xQc0z',
+    alt: 'UI/UX design animation',
     label: 'Hero Visual',
   },
-  stats: { src: '/media/stats-left.gif', alt: 'Performance and metrics animation', label: 'Metrics Story' },
-  services: { src: '/media/services-right.gif', alt: 'Service workflow animation', label: 'Service Flow' },
-  products: { src: '/media/products-left.gif', alt: 'Product toolkit animation', label: 'Product Suite' },
-  projects: { src: '/media/projects-right.gif', alt: 'Case study walkthrough animation', label: 'Case Preview' },
-  team: { src: '/media/team-left.gif', alt: 'Team collaboration animation', label: 'Team Culture' },
-  testimonials: { src: '/media/testimonials-right.gif', alt: 'Client feedback animation', label: 'Client Voice' },
-  pathways: { src: '/media/pathways-left.gif', alt: 'Programs and research animation', label: 'Growth Paths' },
-  cta: { src: '/media/cta-right.gif', alt: 'Final call to action animation', label: 'Launch Ready' },
+  stats: { src: 'https://lottiefiles.com/free-animation/analytics-chart-446AFiFcN3', alt: 'Analytics chart animation', label: 'Metrics Story' },
+  services: { src: 'https://lottiefiles.com/free-animation/uiux-yeCst7sp0c', alt: 'UI/UX animation', label: 'Service Flow' },
+  products: { src: 'https://lottiefiles.com/free-animation/uiux-design-BgWDIBDbU6', alt: 'UI/UX design animation', label: 'Product Suite' },
+  projects: { src: 'https://lottiefiles.com/free-animation/creative-team-eBolNfIgIj', alt: 'Creative team animation', label: 'Case Preview' },
+  team: { src: 'https://lottiefiles.com/free-animation/join-the-team-qWVWPNee3i', alt: 'Join the team animation', label: 'Team Culture' },
+  testimonials: { src: 'https://lottiefiles.com/free-animation/send-a-message-fW7mmuNj9F', alt: 'Send message animation', label: 'Client Voice' },
+  pathways: { src: 'https://lottiefiles.com/free-animation/zen-uxui-hub-HyyPZf8DWQ', alt: 'Zen UX/UI hub animation', label: 'Growth Paths' },
+  cta: { src: 'https://lottiefiles.com/free-animation/contact-sent-email-DBnHqwgGQE', alt: 'Contact sent animation', label: 'Launch Ready' },
 } satisfies Record<string, SectionMediaItem>;
 
 /**
@@ -189,16 +188,17 @@ export default function Landing() {
               prototypes, and polished digital experiences.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-              <Link to={ROUTES.contact} className="group cta-primary px-7">
-                Book Prototype Sprint
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link to={ROUTES.products} className="cta-secondary px-7">
-                See Product Work
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                <Link to={ROUTES.contact} className="group cta-primary px-7">
+                  Book Prototype Sprint
+                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link to={ROUTES.products} className="cta-secondary px-7">
+                  See Product Work
+                </Link>
+              </div>
+              <SectionAnimation variant="hero" size="lg" className="mt-10 lg:mt-0 lg:ml-12" />
             </div>
-          </div>
 
           <SectionMedia media={SECTION_MEDIA.hero} />
         </div>
@@ -215,10 +215,12 @@ export default function Landing() {
                   Measurable delivery quality across strategy, interface systems, and prototype validation.
                 </p>
               </div>
-
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 cards-grid">
                 {stats.map((stat) => (
-                  <article key={stat.label} className="card-equal surface-panel p-6">
+                  <article key={stat.label} className="card-equal surface-panel p-6 relative">
+                    {stat.label === stats[0].label && (
+                      <SectionAnimation variant="stats" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] tracking-tight">
                       {stat.value}
                     </div>
@@ -248,8 +250,11 @@ export default function Landing() {
                 return (
                   <article
                     key={service.title}
-                    className="group card-equal card-pad surface-panel hover:shadow-xl hover:shadow-[var(--primary)]/10 hover:-translate-y-1 transition-all"
+                    className="group card-equal card-pad surface-panel hover:shadow-xl hover:shadow-[var(--primary)]/10 hover:-translate-y-1 transition-all relative"
                   >
+                    {service.title === services[0].title && (
+                      <SectionAnimation variant="services" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className="w-11 h-11 rounded-xl bg-[var(--gradient-accent)]/10 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                       <Icon size={20} className="text-[var(--primary)]" />
                     </div>
@@ -279,8 +284,11 @@ export default function Landing() {
                   <Link
                     key={product.name}
                     to={ROUTES.products}
-                    className="group card-equal block card-pad surface-panel hover:shadow-xl hover:shadow-[var(--primary)]/10 hover:border-[var(--primary)]/30 transition-all"
+                    className="group card-equal block card-pad surface-panel hover:shadow-xl hover:shadow-[var(--primary)]/10 hover:border-[var(--primary)]/30 transition-all relative"
                   >
+                    {product.name === PRODUCT_PREVIEWS[0].name && (
+                      <SectionAnimation variant="products" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className="flex items-center justify-between mb-5">
                       <div className="w-11 h-11 rounded-xl bg-[var(--gradient-primary)] opacity-90" />
                       <span className="status-success text-xs px-2 py-1 rounded-md border font-medium">
@@ -313,7 +321,10 @@ export default function Landing() {
 
             <div className="grid md:grid-cols-3 cards-grid">
               {projects.map((project) => (
-                <article key={project.name} className="card-equal surface-panel card-pad hover:border-[var(--primary)]/30 transition-all">
+                <article key={project.name} className="card-equal surface-panel card-pad hover:border-[var(--primary)]/30 transition-all relative">
+                  {project.name === projects[0].name && (
+                    <SectionAnimation variant="projects" size="sm" className="absolute top-4 right-4" />
+                  )}
                   <div className="inline-flex items-center rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs text-[var(--text-secondary)] mb-4">
                     {project.domain}
                   </div>
@@ -342,7 +353,10 @@ export default function Landing() {
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 cards-grid">
                 {team.map((member) => (
-                  <article key={member.name} className="card-equal surface-panel card-pad">
+                  <article key={member.name} className="card-equal surface-panel card-pad relative">
+                    {member.name === team[0].name && (
+                      <SectionAnimation variant="team" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className="w-11 h-11 rounded-full bg-[var(--gradient-accent)] mb-4" />
                     <h3 className="text-lg font-bold text-[var(--text-primary)]">{member.name}</h3>
                     <p className="text-sm text-[var(--primary)] mt-1 mb-3">{member.role}</p>
@@ -367,7 +381,10 @@ export default function Landing() {
 
             <div className="grid md:grid-cols-3 cards-grid">
               {testimonials.map((testimonial) => (
-                <blockquote key={testimonial.author} className="card-equal surface-panel card-pad">
+                <blockquote key={testimonial.author} className="card-equal surface-panel card-pad relative">
+                  {testimonial.author === testimonials[0].author && (
+                    <SectionAnimation variant="testimonials" size="sm" className="absolute top-4 right-4" />
+                  )}
                   <p className="text-sm text-[var(--text-primary)] leading-relaxed mb-5">
                     &quot;{testimonial.quote}&quot;
                   </p>
@@ -389,6 +406,7 @@ export default function Landing() {
             <div className="grid md:grid-cols-2 gap-8 p-2 md:p-3">
               <Link to={ROUTES.internship} className="group relative overflow-hidden surface-panel card-pad hover:shadow-xl transition-all">
                 <div className="relative">
+                  <SectionAnimation variant="pathways" size="sm" className="absolute top-4 right-4" />
                   <Rocket size={30} className="text-[var(--primary)] mb-4" />
                   <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-3">Internship Program</h3>
                   <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
@@ -441,6 +459,7 @@ export default function Landing() {
                     View Services
                   </Link>
                 </div>
+                <SectionAnimation variant="cta" size="md" className="mt-8 lg:absolute lg:right-8 lg:top-1/2 lg:-translate-y-1/2" />
               </div>
             </div>
           </div>

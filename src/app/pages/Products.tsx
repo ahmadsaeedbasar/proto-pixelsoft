@@ -2,15 +2,16 @@ import React from 'react';
 import { ArrowRight, BarChart3, Shield, Sparkles, TrendingUp, Users2, Zap } from 'lucide-react';
 import { Link } from 'react-router';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import { SectionAnimation } from '../components/SectionAnimation';
 import Reveal from '../components/Reveal';
 import { StatusBadge } from '../components/StatusBadge';
 import { ROUTES } from '../routePaths';
 
 const SECTION_MEDIA = {
-  hero: { src: '/media/products-hero-right.gif', alt: 'Products hero animation', label: 'Product Visual' },
-  catalog: { src: '/media/products-catalog-left.gif', alt: 'Product catalog animation', label: 'Catalog' },
-  velocity: { src: '/media/products-velocity-right.gif', alt: 'Design velocity animation', label: 'Design Velocity' },
-  cta: { src: '/media/products-cta-left.gif', alt: 'Product collaboration animation', label: 'Collaboration' },
+  hero: { src: 'https://lottiefiles.com/free-animation/uiux-design-BgWDIBDbU6', alt: 'UI/UX design animation', label: 'Product Visual' },
+  catalog: { src: 'https://lottiefiles.com/free-animation/ux-ui-Qz7boeYI1a', alt: 'UX UI animation', label: 'Catalog' },
+  velocity: { src: 'https://lottiefiles.com/free-animation/analytics-chart-446AFiFcN3', alt: 'Analytics chart animation', label: 'Design Velocity' },
+  cta: { src: 'https://lottiefiles.com/free-animation/contact-sent-email-DBnHqwgGQE', alt: 'Contact sent animation', label: 'Collaboration' },
 } satisfies Record<string, SectionMediaItem>;
 
 export default function Products() {
@@ -95,6 +96,7 @@ export default function Products() {
             <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
               Internal products crafted to accelerate UX design, prototyping, and experimentation.
             </p>
+            <SectionAnimation variant="hero" size="lg" className="mt-12 lg:mt-0 lg:ml-14" />
           </div>
           <SectionMedia media={SECTION_MEDIA.hero} />
         </div>
@@ -107,8 +109,10 @@ export default function Products() {
               {products.map((product, idx) => {
                 const Icon = product.icon;
                 return (
-                  <Reveal as="article" key={product.name} className="group card-equal card-pad surface-panel" delay={idx * 70}>
-                    
+                  <Reveal as="article" key={product.name} className="group card-equal card-pad surface-panel relative" delay={idx * 70}>
+                    {product.name === products[0].name && (
+                      <SectionAnimation variant="products" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className="flex items-start justify-between mb-6">
                       <div className={`w-12 h-12 ${product.gradient} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform`}>
                         <Icon size={22} className="text-[var(--text-primary)]" />
@@ -149,8 +153,11 @@ export default function Products() {
               </div>
               <div className="grid md:grid-cols-4 cards-grid">
                 {innovation.map((item) => (
-                  <article key={item.title} className="card-equal card-pad surface-panel text-center hover:border-[var(--primary)]/30 transition-colors">
-                    <h3 className="font-semibold mb-1 text-[var(--text-primary)]">{item.title}</h3>
+                  <article key={item.title} className="card-equal card-pad surface-panel text-center hover:border-[var(--primary)]/30 transition-colors relative">
+                  {item.title === innovation[0].title && (
+                    <SectionAnimation variant="stats" size="sm" className="absolute top-4 right-4" />
+                  )}
+                  <h3 className="font-semibold mb-1 text-[var(--text-primary)]">{item.title}</h3>
                     <p className="text-sm text-[var(--text-secondary)]">{item.desc}</p>
                   </article>
                 ))}
@@ -175,6 +182,7 @@ export default function Products() {
                   Start Collaboration
                   <ArrowRight size={18} />
                 </Link>
+                <SectionAnimation variant="cta" size="md" className="mt-8 lg:absolute lg:right-8 lg:top-1/2 lg:-translate-y-1/2" />
               </div>
             </div>
           </div>

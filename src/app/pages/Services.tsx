@@ -2,15 +2,16 @@ import React from 'react';
 import { ArrowRight, Check, Code2, Globe, Lightbulb, Palette, Smartphone, Sparkles } from 'lucide-react';
 import { Link } from 'react-router';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import { SectionAnimation } from '../components/SectionAnimation';
 import Reveal from '../components/Reveal';
 import { ROUTES } from '../routePaths';
 
 const SECTION_MEDIA = {
-  hero: { src: '/media/services-hero-right.gif', alt: 'Services hero animation', label: 'Service Visual' },
-  services: { src: '/media/services-grid-left.gif', alt: 'Service cards animation', label: 'Core Services' },
-  projects: { src: '/media/services-projects-right.gif', alt: 'Project outcomes animation', label: 'Case Outcomes' },
-  process: { src: '/media/services-process-left.gif', alt: 'Delivery process animation', label: 'Delivery Flow' },
-  cta: { src: '/media/services-cta-right.gif', alt: 'Service CTA animation', label: 'Start Sprint' },
+  hero: { src: 'https://lottiefiles.com/free-animation/uiux-yeCst7sp0c', alt: 'UI/UX animation', label: 'Service Visual' },
+  services: { src: 'https://lottiefiles.com/free-animation/ui-and-ux-design-K6It0xQc0z', alt: 'UI and UX design animation', label: 'Core Services' },
+  projects: { src: 'https://lottiefiles.com/free-animation/creative-team-eBolNfIgIj', alt: 'Creative team animation', label: 'Case Outcomes' },
+  process: { src: 'https://lottiefiles.com/free-animation/analytics-chart-446AFiFcN3', alt: 'Analytics chart animation', label: 'Delivery Flow' },
+  cta: { src: 'https://lottiefiles.com/free-animation/contact-sent-email-DBnHqwgGQE', alt: 'Contact sent animation', label: 'Start Sprint' },
 } satisfies Record<string, SectionMediaItem>;
 
 export default function Services() {
@@ -105,6 +106,7 @@ export default function Services() {
             <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
               We combine research, UI craftsmanship, and prototyping to reduce guesswork in product decisions.
             </p>
+            <SectionAnimation variant="hero" size="lg" className="mt-12 lg:mt-0 lg:ml-14" />
           </div>
           <SectionMedia media={SECTION_MEDIA.hero} />
         </div>
@@ -117,7 +119,10 @@ export default function Services() {
               {services.map((service, idx) => {
                 const Icon = service.icon;
                 return (
-                  <Reveal as="article" key={service.title} className={`group card-equal card-pad surface-panel anim-service`} delay={idx * 80}>
+                  <Reveal as="article" key={service.title} className={`group card-equal card-pad surface-panel anim-service relative`} delay={idx * 80}>
+                    {service.title === services[0].title && (
+                      <SectionAnimation variant="services" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className={`w-12 h-12 ${service.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform service-icon`}>
                       <Icon size={22} className="text-[var(--text-primary)]" />
                     </div>
@@ -150,7 +155,10 @@ export default function Services() {
 
             <div className="grid md:grid-cols-3 cards-grid">
               {projects.map((project, idx) => (
-                <Reveal as="article" key={project.name} className="card-equal surface-panel card-pad anim-project" delay={idx * 100}>
+                <Reveal as="article" key={project.name} className="card-equal surface-panel card-pad anim-project relative" delay={idx * 100}>
+                  {project.name === projects[0].name && (
+                    <SectionAnimation variant="projects" size="sm" className="absolute top-4 right-4" />
+                  )}
                   <p className="text-xs uppercase tracking-[0.18em] text-[var(--text-secondary)] mb-3">{project.category}</p>
                   <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3">{project.name}</h3>
                   <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">{project.summary}</p>
@@ -176,8 +184,11 @@ export default function Services() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 cards-grid">
                 {process.map((phase, idx) => (
-                  <Reveal as="article" key={phase.step} className="card-equal card-pad surface-panel anim-process hover:border-[var(--primary)]/30 hover:shadow-lg transition-all" delay={idx * 90}>
-                    <div className="text-4xl font-bold text-[var(--primary)]/15 mb-4 step-badge">{phase.step}</div>
+                <Reveal as="article" key={phase.step} className="card-equal card-pad surface-panel anim-process hover:border-[var(--primary)]/30 hover:shadow-lg transition-all relative" delay={idx * 90}>
+                  {phase.step === process[0].step && (
+                    <SectionAnimation variant="focus" size="sm" className="absolute top-4 right-4" />
+                  )}
+                  <div className="text-4xl font-bold text-[var(--primary)]/15 mb-4 step-badge">{phase.step}</div>
                     <h3 className="text-lg font-bold mb-2 text-[var(--text-primary)]">{phase.title}</h3>
                     <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{phase.desc}</p>
                   </Reveal>
@@ -202,6 +213,7 @@ export default function Services() {
                   Book a Sprint
                   <ArrowRight size={18} />
                 </Link>
+                <SectionAnimation variant="cta" size="md" className="mt-10 lg:absolute lg:right-8 lg:top-1/2 lg:-translate-y-1/2" />
               </div>
             </div>
           </div>

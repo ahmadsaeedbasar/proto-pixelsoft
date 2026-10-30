@@ -2,16 +2,17 @@ import React from 'react';
 import { ArrowRight, Blocks, Brain, Lightbulb, Microscope, Radio, TrendingUp, Users2 } from 'lucide-react';
 import { Link } from 'react-router';
 import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
+import { SectionAnimation } from '../components/SectionAnimation';
 import { StatusBadge } from '../components/StatusBadge';
 import { ROUTES } from '../routePaths';
 
 const SECTION_MEDIA = {
-  hero: { src: '/media/research-hero-right.gif', alt: 'Research hero animation', label: 'Lab Visual' },
-  vision: { src: '/media/research-vision-left.gif', alt: 'Research vision animation', label: 'Vision' },
-  focus: { src: '/media/research-focus-right.gif', alt: 'Research focus animation', label: 'Focus Areas' },
-  experiments: { src: '/media/research-experiments-left.gif', alt: 'Ongoing experiments animation', label: 'Experiments' },
-  roadmap: { src: '/media/research-roadmap-right.gif', alt: 'Research roadmap animation', label: 'Roadmap' },
-  cta: { src: '/media/research-cta-left.gif', alt: 'Research collaboration animation', label: 'Collaborate' },
+  hero: { src: 'https://lottiefiles.com/free-animation/ux-ui-Qz7boeYI1a', alt: 'UX UI animation', label: 'Lab Visual' },
+  vision: { src: 'https://lottiefiles.com/free-animation/zen-uxui-hub-HyyPZf8DWQ', alt: 'Zen UX/UI hub animation', label: 'Vision' },
+  focus: { src: 'https://lottiefiles.com/free-animation/uiux-design-BgWDIBDbU6', alt: 'UI/UX design animation', label: 'Focus Areas' },
+  experiments: { src: 'https://lottiefiles.com/free-animation/analytics-chart-446AFiFcN3', alt: 'Analytics chart animation', label: 'Experiments' },
+  roadmap: { src: 'https://lottiefiles.com/free-animation/monthly-fluctuating-looped-graph-chart-m6lK0qqpL1', alt: 'Monthly graph animation', label: 'Roadmap' },
+  cta: { src: 'https://lottiefiles.com/free-animation/contact-sent-email-DBnHqwgGQE', alt: 'Contact sent animation', label: 'Collaborate' },
 } satisfies Record<string, SectionMediaItem>;
 
 export default function Research() {
@@ -79,6 +80,7 @@ export default function Research() {
             <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
               We investigate user behavior, interface patterns, and design systems to improve product outcomes.
             </p>
+            <SectionAnimation variant="hero" size="lg" className="mt-12 lg:mt-0 lg:ml-14" />
           </div>
           <SectionMedia media={SECTION_MEDIA.hero} />
         </div>
@@ -87,7 +89,8 @@ export default function Research() {
       <section className="border-y border-border/70 bg-card/20">
         <div className="section-wrap section-pad-tight">
           <div className="section-with-media media-left">
-            <div className="section-body max-w-5xl mx-auto text-center">
+            <div className="section-body max-w-5xl mx-auto text-center relative">
+              <SectionAnimation variant="vision" size="sm" className="absolute top-4 right-4" />
               <Lightbulb size={46} className="mx-auto mb-6 text-[var(--primary)]" />
               <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight text-[var(--text-primary)]">Research Vision</h2>
               <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
@@ -114,8 +117,11 @@ export default function Research() {
                 return (
                   <article
                     key={area.title}
-                    className="group card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/8 transition-all hover:-translate-y-1"
+                    className="group card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/8 transition-all hover:-translate-y-1 relative"
                   >
+                    {area.title === focusAreas[0].title && (
+                      <SectionAnimation variant="focus" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className={`w-12 h-12 ${area.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform`}>
                       <Icon size={22} className="text-[var(--text-primary)]" />
                     </div>
@@ -154,8 +160,11 @@ export default function Research() {
                 {experiments.map((experiment) => (
                   <article
                     key={experiment.title}
-                    className="card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-lg transition-all"
+                    className="card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-lg transition-all relative"
                   >
+                    {experiment.title === experiments[0].title && (
+                      <SectionAnimation variant="experiments" size="sm" className="absolute top-4 right-4" />
+                    )}
                     <div className="flex items-start justify-between mb-4">
                       <h3 className="font-semibold flex-1 text-sm text-[var(--text-primary)]">{experiment.title}</h3>
                       <StatusBadge variant={experiment.status} />
@@ -189,7 +198,10 @@ export default function Research() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 cards-grid">
               {roadmap.map((quarter) => (
-                <article key={quarter.quarter} className="card-equal card-pad surface-panel hover:border-[var(--primary)]/30 transition-colors">
+                <article key={quarter.quarter} className="card-equal card-pad surface-panel hover:border-[var(--primary)]/30 transition-colors relative">
+                  {quarter.quarter === roadmap[0].quarter && (
+                    <SectionAnimation variant="roadmap" size="sm" className="absolute top-4 right-4" />
+                  )}
                   <div className="inline-block px-3 py-1 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius)] text-xs font-medium mb-4">{quarter.quarter}</div>
                   <ul className="space-y-2">
                     {quarter.items.map((item) => (
@@ -226,6 +238,7 @@ export default function Research() {
                     Read Findings
                   </button>
                 </div>
+                <SectionAnimation variant="cta" size="md" className="mt-8 lg:absolute lg:right-8 lg:top-1/2 lg:-translate-y-1/2" />
               </div>
             </div>
           </div>
