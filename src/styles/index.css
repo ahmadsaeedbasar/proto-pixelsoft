@@ -130,20 +130,34 @@ body {
   }
 
   .media-frame {
-    @apply relative overflow-hidden border border-border/80 bg-card/90 p-3;
-    border-radius: var(--radius);
-    corner-shape: squircle;
-    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 1rem;
+    border-radius: 1.6rem;
+    box-shadow:
+      0 18px 44px rgba(5, 10, 20, 0.28),
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 0 0 1px rgba(255,255,255,0.03);
     animation: media-float 6s ease-in-out infinite;
+    width: min(100%, 32rem);
+    height: auto;
+    margin-inline: auto;
   }
 
   .media-image {
     width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: calc(var(--radius) - 0.3rem);
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    border-radius: 1.2rem;
+    display: block;
     transform-origin: center;
     animation: media-zoom 8s ease-in-out infinite;
+    background: rgba(15, 18, 26, 0.9);
   }
 
   .media-overlay {
@@ -151,11 +165,46 @@ body {
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 20% 15%, color-mix(in oklab, var(--primary) 28%, transparent), transparent 38%),
-      radial-gradient(circle at 80% 80%, color-mix(in oklab, var(--info) 24%, transparent), transparent 40%);
+      radial-gradient(circle at 18% 12%, rgba(112, 76, 255, 0.28), transparent 30%),
+      radial-gradient(circle at 82% 78%, rgba(61, 201, 255, 0.18), transparent 32%),
+      linear-gradient(135deg, rgba(255,255,255,0.04), transparent 30%, rgba(255,255,255,0.02));
     mix-blend-mode: screen;
-    opacity: 0.7;
+    opacity: 0.9;
     animation: media-glow 5.2s ease-in-out infinite alternate;
+  }
+
+  /* Media control overlay (play/pause, speed) */
+  .media-controls {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: inline-flex;
+    gap: 0.5rem;
+    z-index: 20;
+    align-items: center;
+  }
+
+  .media-control-button {
+    @apply inline-flex items-center justify-center gap-2 px-2 py-1 rounded-md bg-card/90 border border-border/70 text-[var(--text-primary)];
+    backdrop-filter: blur(6px);
+    transition: transform 160ms ease, background-color 160ms ease;
+  }
+
+  .media-control-button:hover {
+    transform: translateY(-2px);
+    background-color: color-mix(in oklab, var(--primary) 8%, transparent);
+  }
+
+  .media-caption {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.6rem;
+    font-size: 11px;
+    color: color-mix(in oklab, var(--text-secondary) 92%, transparent);
+    background: rgba(0,0,0,0.0);
+    padding: 0.2rem 0.45rem;
+    border-radius: 6px;
+    z-index: 18;
   }
 
   /* Entry reveal used across cards with optional stagger via inline style */

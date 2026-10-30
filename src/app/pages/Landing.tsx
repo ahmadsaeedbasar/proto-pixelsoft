@@ -55,7 +55,13 @@ const PRODUCT_PREVIEWS: ProductPreviewItem[] = [
  * The layout and animations are handled by shared classes in `index.css`.
  */
 const SECTION_MEDIA = {
-  hero: { src: '/media/hero-right.gif', alt: 'Hero design showcase animation', label: 'Hero Visual' },
+  // Professional Lottie animation for the landing hero card.
+  // Keep local file or swap to a trusted JSON URL.
+  hero: {
+    src: 'https://lottiefiles.com/animation/underwater-trash-with-fish-floating-animation_10719813',
+    alt: 'Underwater fish floating animation',
+    label: 'Hero Visual',
+  },
   stats: { src: '/media/stats-left.gif', alt: 'Performance and metrics animation', label: 'Metrics Story' },
   services: { src: '/media/services-right.gif', alt: 'Service workflow animation', label: 'Service Flow' },
   products: { src: '/media/products-left.gif', alt: 'Product toolkit animation', label: 'Product Suite' },

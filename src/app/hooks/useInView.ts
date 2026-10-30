@@ -5,14 +5,26 @@ export function useInView<T extends Element>(options?: IntersectionObserverInit)
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    if (!ref.current) return;
     const node = ref.current;
+    if (!node) return;
+
+    // If IntersectionObserver is not available, immediately mark as in view.
+    if (typeof IntersectionObserver === 'undefined') {
+      setInView(true);
+      return;
+    }
+
+    let didCancel = false;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !didCancel) {
             setInView(true);
-            if (observer) observer.unobserve(node);
+            try {
+              observer.unobserve(entry.target);
+            } catch (e) {
+              /* ignore */
+            }
           }
         });
       },
@@ -21,7 +33,11 @@ export function useInView<T extends Element>(options?: IntersectionObserverInit)
 
     observer.observe(node);
 
-    return () => observer.disconnect();
+    return () => {
+      didCancel = true;
+      observer.disconnect();
+    };
+    // We intentionally include ref.current so the effect runs when the element mounts.
   }, [ref.current]);
 
   return { ref: ref as RefObject<T>, inView };
